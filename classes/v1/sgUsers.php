@@ -34,7 +34,8 @@ class SgUsers{
 	public $training;
 	public $training_station;
 	public $training_position;
-
+	public $is_cust_dash;
+	public $line_cust_dash;
 	// Db connection
 	public function __construct($db)
 	{
@@ -65,6 +66,8 @@ class SgUsers{
 			$this->lastname = $dataRow['lastname'];
 			$this->pin = $dataRow['pin'];
 			$this->pin_flag = $dataRow['pin_flag'];
+			$this->is_cust_dash = $dataRow['is_cust_dash'];
+			$this->line_cust_dash = $dataRow['line_cust_dash'];
 			return $this;
 		}
 	}
