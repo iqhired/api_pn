@@ -1,6 +1,7 @@
 <?php
 require "../../../vendor/autoload.php";
 use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 
 include_once '../../../config/database.php';
 
@@ -17,7 +18,7 @@ $jwt = $_SERVER['HTTP_ACCESS_TOKEN'];
 if($jwt){
 	try {
 
-		$decoded = JWT::decode($jwt, $secretkey, array('HS256'));
+		$decoded = JWT::decode($jwt,  new Key($secretkey, 'HS256'));
 
 		// Access is granted. Add code of the operation here
 
