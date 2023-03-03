@@ -1,5 +1,4 @@
 <?php
-
 class Part_Produced{
      private $conn;
 
@@ -17,12 +16,12 @@ class Part_Produced{
 
      public function getPartProduced(){
 
-         $sqlQuery = "Select * from". $this->conn = $db_table. "where part_number=? and part_number_extra?";
+         $sqlQuery = "Select * from ". $this->db_table . " where part_number= ? and part_number_extra= ?";
 
          $stmt = $this->conn->prepare($sqlQuery);
 
          $stmt->bindParam(1, $this->part_number);
-         $stmt->bindParam(2, $this->password);
+         $stmt->bindParam(2, $this->part_count);
 
          $stmt->execute();
 
@@ -33,12 +32,37 @@ class Part_Produced{
          }else{
              $this->id = $dataRow['id'];
              $this->part_number = $dataRow['part_number'];
-             $this->part_number_extra = $dataRow['part_number_extra'];
-             $this->part_count = $dataRow['part_count'];
+             $this->part_number_extra = $dataRow['part_number_extra_1'];
+             $this->part_count = $dataRow['part_count_1'];
              return $this;
          }
 
      }
+
+    public function insertPartProduced(){
+
+        $sqlQuery = "Select * from ". $this->db_table . " where part_number= ? and part_number_extra= ?";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+
+        $stmt->bindParam(1, $this->part_number);
+        $stmt->bindParam(2, $this->part_count);
+
+        $stmt->execute();
+
+        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($dataRow == null || empty($dataRow)){
+            return null;
+        }else{
+            $this->id = $dataRow['id'];
+            $this->part_number = $dataRow['part_number'];
+            $this->part_number_extra = $dataRow['part_number_extra_1'];
+            $this->part_count = $dataRow['part_count_1'];
+            return $this;
+        }
+
+    }
 
 
 }
