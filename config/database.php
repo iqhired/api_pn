@@ -3,11 +3,11 @@ include_once 'config.php';
     class Database {
 
         private $host  = "localhost";
-        private $database_name = "sg_crewAssignmentMgmt";
-//        private $database_name = "dbzdwexbkd5orw";
-        private $username = "ashams001";
+        private $database_name = "server";
+//        private $database_name = "server";
+        private $username = "root";
 //        private $username = "umvc1ebnftglp";
-        private $password = "iqHired@123";
+        private $password = "";
 //        private $password = "holliiszwida";
 
         public $conn;

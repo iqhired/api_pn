@@ -13,7 +13,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../../../classes/v1/sgUsers.php';
 
-
 $jwt = $_SERVER['HTTP_ACCESS_TOKEN'];
 if($jwt){
 	try {

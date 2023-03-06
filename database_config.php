@@ -4,14 +4,14 @@ session_start();
 ini_set('display_errors', FALSE);
 
 $servername = "localhost";
-$username = "umvc1ebnftglp";
-$password = "holliiszwida";
-$dbname = "dbzdwexbkd5orw";
+$username = "root";
+$password = "";
+$dbname = "server";
 
 // to check whether pin is updated or not 
 
-$db = mysqli_connect('localhost','root','','saargummi');
-$mysqli = new mysqli('localhost', 'root', '', 'saargummi');
+$db = mysqli_connect('localhost','root','','server');
+$mysqli = new mysqli('localhost', 'root', '', 'server');
 
 //$db = mysqli_connect('localhost','sg_crew_assign_mgr','sg_crew_assign_mgr@2020','sg_crew_assign_mgmt');
 //$mysqli = new mysqli('localhost', 'sg_crew_assign_mgr', 'sg_crew_assign_mgr@2020', 'sg_crew_assign_mgmt');

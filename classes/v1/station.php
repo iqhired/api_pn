@@ -93,7 +93,7 @@ class Station{
                         line_name = :line_name, 
                         priority_order = :priority_order, 
                         enabled = :enabled
-                    WHERE 
+                        WHERE 
                         line_id = :line_id";
 
 		$stmt = $this->conn->prepare($sqlQuery);
