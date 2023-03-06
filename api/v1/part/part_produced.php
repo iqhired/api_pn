@@ -28,11 +28,17 @@ if($jwt){
 
         $data = json_decode(file_get_contents("php://input"));
 
+        $tc =  $_POST['total_count'];
         $item->part_number = $_POST['part_number'];
-        $item->part_number_extra = $_POST['part_number_extra_1'];
-        $item->part_count = $_POST['part_count_1'];
+        $pcx = $_POST['part_number_extra'];
+        $pc = $_POST["part_count"];
+        for($i = 1; $i <= $tc; $i++) {
 
-        $sgPart = $item->getPartProduced();
+            $item->part_number_extra = $pcx[$i];
+            $item->part_count = $pc[$i];
+            $sgPart = $item->getPartProduced();
+        }
+
         if($sgPart != null){
             http_response_code(200);
             echo json_encode(array("STATUS" => "Success" , "part_number" => $sgPart));
