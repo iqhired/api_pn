@@ -29,8 +29,8 @@ if($jwt){
         $data = json_decode(file_get_contents("php://input"));
 
         $item->part_number = $_POST['part_number'];
-        $item->part_number_extra = $_POST['part_number_extra_1'];
-        $item->part_count = $_POST['part_count_1'];
+        $item->part_number_extra = $_POST['part_number_extra'];
+        $item->part_count = $_POST['part_count'];
 
         $sgPart = $item->getPartProduced();
         if($sgPart != null){
