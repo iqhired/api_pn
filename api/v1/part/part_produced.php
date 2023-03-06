@@ -38,7 +38,7 @@ if($jwt){
             echo json_encode(array("STATUS" => "Success" , "part_number" => $sgPart));
         } else{
             http_response_code(401);
-            echo json_encode(array("message" => "Login failed. Check User Name and Password"));
+            echo json_encode(array("message" => "Part number failed"));
         }
 
     }catch (Exception $e){
