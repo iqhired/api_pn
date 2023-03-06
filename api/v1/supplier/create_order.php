@@ -24,7 +24,6 @@ try{
     echo $e->getMessage();
 }
 
-
 if($jwt){
     try {
 
