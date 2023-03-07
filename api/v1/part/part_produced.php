@@ -37,7 +37,6 @@ if($jwt){
         foreach ($item->part_number_extra as $count => $result) {
             $results[] = [$result, $item->part_count[$count]];
         }
-
         $result = json_encode( ["results" => $results] );
 
         $sgPart = $item->getPartProduced();
