@@ -29,15 +29,9 @@ if($jwt){
         $data = json_decode(file_get_contents("php://input"));
 
         $item->part_number = $_POST['part_number'];
-        $item->part_number_extra = $_POST['part_number_extra'];
-        $item->part_count = $_POST['part_count'];
-
-        $results = [];
-
-        foreach ($item->part_number_extra as $count => $result) {
-            $results[] = [$result, $item->part_count[$count]];
-        }
-        $result = json_encode( ["results" => $results] );
+        $item->dependant_parts = $_POST['dependant_parts'];
+        $item->created_at = $_POST['created_at'];
+        $item->updated_at = $_POST['updated_at'];
 
         $sgPart = $item->getPartProduced();
 
