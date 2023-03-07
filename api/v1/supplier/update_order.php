@@ -8,21 +8,10 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../../../config/database.php';
-include_once '../../../classes/v1/supplier.php';
-//$jwt ='';
+include_once '../../../classes/v1/station.php';
+
 $jwt = $_SERVER['HTTP_ACCESS_TOKEN'];
-$secretkey = "SupportPassHTSSgmmi";
-$payload = array(
-    "author" => "Saargummi to HTS",
-    "exp" => time()+1000
-);
 
-
-try{
-    $jwt = JWT::encode($payload, $secretkey);
-}catch (UnexpectedValueException $e) {
-    echo $e->getMessage();
-}
 if($jwt){
     try {
 
@@ -38,21 +27,22 @@ if($jwt){
         $data = json_decode(file_get_contents("php://input"));
 
         $item->c_id = $data->c_id;
-        $order_name = $data->order_name;
-        $order_desc = $data->order_desc;
-        $order_status_id = $data->order_status_id;
-        $order_active = $data->order_active;
-        $shipment_details = $data->shipment_details;
-        $created_by = $data->created_by;
-        $modified_on = $data->modified_on;
-        $modified_by = $data->modified_by;
-        $chicagotime = date("Y-m-d H:i:s");
-        $item->created_on = $chicagotime;
 
-        if($item->createOrder()){
-            echo 'Station created successfully.JWT = ' . $jwt;
+        // line values
+        $item->order_name = $data->order_name;
+        $item->order_desc = $data->order_desc;
+        $item->order_status_id = $data->order_status_id;
+        $item->order_active = $data->order_active;
+        $item->shipment_details = $data->shipment_details;
+        $item->created_on = $data->created_on;
+        $item->created_by = $data->created_by;
+        $item->modified_on = $data->modified_on;
+        $item->modified_by = $data->modified_by;
+
+        if($item->updateOrder()){
+            echo json_encode("Order updated successfully.");
         } else{
-            echo 'Station could not be created.';
+            echo json_encode("Order Details could not be updated");
         }
 
     }catch (Exception $e){
