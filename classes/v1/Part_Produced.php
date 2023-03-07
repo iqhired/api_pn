@@ -5,8 +5,9 @@ class Part_Produced
     private $db_table = "pno_vs_pproduced";
     public $id;
     public $part_number;
-    public $part_number_extra;
-    public $part_count;
+    public $dependant_parts;
+    public $created_at;
+    public $updated_at;
     public $click_id;
 
 
@@ -19,13 +20,14 @@ class Part_Produced
     public function getPartProduced()
     {
 
-        $sqlQuery = "insert into " . $this->db_table . "(part_number,part_number_extra,part_count) values (" . $this->part_number . "," . $this->part_number_extra . "," . $this->part_count . ")";
+        $sqlQuery = "insert into " . $this->db_table . "(part_number,dependant_parts,created_at,updated_at) values (" . $this->part_number . "," . $this->dependant_parts . "," .$this->created_at .",".$this->updated_at. ")";
 
         $stmt = $this->conn->prepare($sqlQuery);
 
         $stmt->bindParam(1, $this->part_number);
-        $stmt->bindParam(2, $this->part_number_extra);
-        $stmt->bindParam(2, $this->part_count);
+        $stmt->bindParam(2, $this->dependant_parts);
+        $stmt->bindParam(3, $this->created_at);
+        $stmt->bindParam(4, $this->updated_at);
 
         $stmt->execute();
 
@@ -36,8 +38,9 @@ class Part_Produced
         } else {
             $this->id = $dataRow['id'];
             $this->part_number = $dataRow['part_number'];
-            $this->part_number_extra = $dataRow['part_number_extra'];
-            $this->part_count = $dataRow['part_count'];
+            $this->part_number_extra = $dataRow['dependant_parts'];
+            $this->created_at = $dataRow['created_at'];
+            $this->updated_at = $dataRow['updated_at'];
             return $this;
         }
 
@@ -45,9 +48,9 @@ class Part_Produced
 
 }
 
-$part_produce_array = array( new Part_Produced($this->part_number,$this->part_number_extra, $this->part_count));
-
-
-foreach ($part_produce_array as $part) {
-    echo $part->getPartProduced();
-}
+//$part_produce_array = array( new Part_Produced($this->part_number,$this->part_number_extra, $this->part_count));
+//
+//
+//foreach ($part_produce_array as $part) {
+//    echo $part->getPartProduced();
+//}
