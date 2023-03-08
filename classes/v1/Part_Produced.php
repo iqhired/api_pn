@@ -2,13 +2,12 @@
 class Part_Produced
 {
     private $conn;
-    private $db_table = "pno_vs_pproduced";
+    private $db_table = "pno_vs_pProduced";
     public $id;
     public $part_number;
     public $dependant_parts;
     public $created_at;
     public $updated_at;
-    public $click_id;
 
 
     public function __construct($db)
@@ -20,18 +19,15 @@ class Part_Produced
     public function getPartProduced()
     {
 
-        $sqlQuery = "insert into " . $this->db_table . "(part_number,dependant_parts,created_at,updated_at) values (" . $this->part_number . "," . $this->dependant_parts . "," .$this->created_at .",".$this->updated_at. ")";
+        $sqlQuery = "insert into " . $this->db_table . "(part_number,dependant_parts,created_at,updated_at) values ( ?,?,?,?)";
 
         $stmt = $this->conn->prepare($sqlQuery);
-
-        $stmt->bindParam(1, $this->part_number);
-        $stmt->bindParam(2, $this->dependant_parts);
-        $stmt->bindParam(3, $this->created_at);
-        $stmt->bindParam(4, $this->updated_at);
-
-        $stmt->execute();
-
-        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+		$stmt->execute([$this->part_number, $this->dependant_parts, $this->created_at , $this->updated_at]);
+	
+		$sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".id DESC LIMIT 0,1";
+		$stmt = $this->conn->prepare($sqlQuery1);
+		$stmt->execute();
+		$dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($dataRow == null || empty($dataRow)) {
             return null;
