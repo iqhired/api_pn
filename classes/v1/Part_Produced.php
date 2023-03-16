@@ -42,6 +42,31 @@ class Part_Produced
 
     }
 
+    public function getEditPartProduced()
+    {
+
+        $sqlQuery = "update" . $this->db_table . "SET dependant_parts = ? ,updated_at = ? where part_number = '$this->part_number'";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute([$this->dependant_parts, $this->updated_at]);
+
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".id DESC LIMIT 0,1";
+        $stmt = $this->conn->prepare($sqlQuery1);
+        $stmt->execute();
+        $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($dataRow == null || empty($dataRow)) {
+            return null;
+        } else {
+            $this->id = $dataRow['id'];
+            $this->part_number = $dataRow['part_number'];
+            $this->part_number_extra = $dataRow['dependant_parts'];
+            $this->updated_at = $dataRow['updated_at'];
+            return $this;
+        }
+
+    }
+
 }
 
 //$part_produce_array = array( new Part_Produced($this->part_number,$this->part_number_extra, $this->part_count));
