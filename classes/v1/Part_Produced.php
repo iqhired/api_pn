@@ -45,7 +45,7 @@ class Part_Produced
     public function getEditPartProduced()
     {
 
-        $sqlQuery = "update" . $this->db_table . "SET dependant_parts = ? ,updated_at = ? where part_number = '$this->part_number'";
+        $sqlQuery = "update " . $this->db_table . " SET dependant_parts = ? ,updated_at = ? where part_number = '$this->part_number'";
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->dependant_parts, $this->updated_at]);
