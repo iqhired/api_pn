@@ -8,6 +8,7 @@ class Part_Produced
     public $dependant_parts;
     public $created_at;
     public $updated_at;
+    public $delete_check;
 
 
     public function __construct($db)
@@ -33,10 +34,7 @@ class Part_Produced
             return null;
         } else {
             $this->id = $dataRow['id'];
-            $this->part_number = $dataRow['part_number'];
-            $this->part_number_extra = $dataRow['dependant_parts'];
-            $this->created_at = $dataRow['created_at'];
-            $this->updated_at = $dataRow['updated_at'];
+            $this->delete_check = $dataRow['delete_check'];
             return $this;
         }
 
@@ -62,6 +60,30 @@ class Part_Produced
             $this->part_number = $dataRow['part_number'];
             $this->part_number_extra = $dataRow['dependant_parts'];
             $this->updated_at = $dataRow['updated_at'];
+            return $this;
+        }
+
+    }
+
+    public function getdeletePartProduced()
+    {
+
+        $sqlQuery = "delete " . $this->db_table . " where part_number = '$this->delete_check'";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute([$this->dependant_parts, $this->updated_at]);
+
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".id DESC LIMIT 0,1";
+        $stmt = $this->conn->prepare($sqlQuery1);
+        $stmt->execute();
+        $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($dataRow == null || empty($dataRow)) {
+            return null;
+        } else {
+            $this->id = $dataRow['id'];
+            $this->part_number = $dataRow['part_number'];
+
             return $this;
         }
 
