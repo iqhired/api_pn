@@ -68,10 +68,10 @@ class Part_Produced
     public function getdeletePartProduced()
     {
 
-        $sqlQuery = "delete " . $this->db_table . " where part_number = '$this->delete_check'";
+        $sqlQuery = "delete from " . $this->db_table . " where id = ?";
 
         $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute([$this->dependant_parts, $this->updated_at]);
+        $stmt->execute([$this->delete_check]);
 
         $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".id DESC LIMIT 0,1";
         $stmt = $this->conn->prepare($sqlQuery1);
