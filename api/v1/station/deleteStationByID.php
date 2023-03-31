@@ -1,6 +1,6 @@
 <?php
 require "../../../vendor/autoload.php";
-use \Firebase\JWT\JWT;
+use Firebase\JWT\JWT;
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
