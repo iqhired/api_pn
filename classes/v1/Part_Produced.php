@@ -2,13 +2,13 @@
 class Part_Produced
 {
     private $conn;
-    private $db_table = "pno_vs_pproduced";
+    private $db_table = "pno_vs_pProduced";
     public $id;
     public $part_number;
     public $dependant_parts;
     public $created_at;
     public $updated_at;
-    public $click_id;
+    public $delete_check;
 
 
     public function __construct($db)
@@ -20,18 +20,38 @@ class Part_Produced
     public function getPartProduced()
     {
 
-        $sqlQuery = "insert into " . $this->db_table . "(part_number,dependant_parts,created_at,updated_at) values (" . $this->part_number . "," . $this->dependant_parts . "," .$this->created_at .",".$this->updated_at. ")";
+        $sqlQuery = "insert into " . $this->db_table . "(part_number,dependant_parts,created_at,updated_at) values ( ?,?,?,?)";
 
         $stmt = $this->conn->prepare($sqlQuery);
+		$stmt->execute([$this->part_number, $this->dependant_parts, $this->created_at , $this->updated_at]);
+	
+		$sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".id DESC LIMIT 0,1";
+		$stmt = $this->conn->prepare($sqlQuery1);
+		$stmt->execute();
+		$dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt->bindParam(1, $this->part_number);
-        $stmt->bindParam(2, $this->dependant_parts);
-        $stmt->bindParam(3, $this->created_at);
-        $stmt->bindParam(4, $this->updated_at);
+        if ($dataRow == null || empty($dataRow)) {
+            return null;
+        } else {
+            $this->id = $dataRow['id'];
+            $this->delete_check = $dataRow['delete_check'];
+            return $this;
+        }
 
+    }
+
+    public function getEditPartProduced()
+    {
+
+        $sqlQuery = "update " . $this->db_table . " SET dependant_parts = ? ,updated_at = ? where part_number = '$this->part_number'";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute([$this->dependant_parts, $this->updated_at]);
+
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".id DESC LIMIT 0,1";
+        $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
-
-        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+        $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($dataRow == null || empty($dataRow)) {
             return null;
@@ -39,8 +59,31 @@ class Part_Produced
             $this->id = $dataRow['id'];
             $this->part_number = $dataRow['part_number'];
             $this->part_number_extra = $dataRow['dependant_parts'];
-            $this->created_at = $dataRow['created_at'];
             $this->updated_at = $dataRow['updated_at'];
+            return $this;
+        }
+
+    }
+
+    public function getdeletePartProduced()
+    {
+
+        $sqlQuery = "delete from " . $this->db_table . " where id = ?";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute([$this->delete_check]);
+
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".id DESC LIMIT 0,1";
+        $stmt = $this->conn->prepare($sqlQuery1);
+        $stmt->execute();
+        $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($dataRow == null || empty($dataRow)) {
+            return null;
+        } else {
+            $this->id = $dataRow['id'];
+            $this->part_number = $dataRow['part_number'];
+
             return $this;
         }
 

@@ -18,8 +18,8 @@ $mysqli = new mysqli('localhost', 'root', '', 'server');
 
 date_default_timezone_set("America/chicago");
 
-$sitename = "SaarGummi";
+$sitename = "pn";
 
-$scriptName = "http://localhost/saargummi/";
+$scriptName = "http://localhost/pn/";
 
 ?>

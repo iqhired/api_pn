@@ -70,6 +70,7 @@ class SgUsers{
 			$this->is_cust_dash = $dataRow['is_cust_dash'];
 			$this->line_cust_dash = $dataRow['line_cust_dash'];
 			$this->u_status = $dataRow['u_status'];
+			$this->email = $dataRow['email'];
 			return $this;
 		}
 	}
