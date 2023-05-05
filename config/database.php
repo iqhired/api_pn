@@ -3,7 +3,7 @@ include_once 'config.php';
     class Database {
 
         private $host  = "localhost";
-        private $database_name = "server";
+        private $database_name = "testplantnavigator";
 //        private $database_name = "server";
         private $username = "root";
 //        private $username = "umvc1ebnftglp";
