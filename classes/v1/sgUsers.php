@@ -59,18 +59,33 @@ class SgUsers{
 			return null;
 		}else{
 			$this->users_id = $dataRow['users_id'];
+            $this->user_name = $dataRow['user_name'];
+            $this->email = $dataRow['email'];
+            $this->password = $dataRow['password'];
+            $this->role = $dataRow['role'];
+            $this->profile_pic = $dataRow['profile_pic'];
+            $this->created_at = $dataRow['created_at'];
+            $this->updated_at = $dataRow['updated_at'];
+            $this->assigned = $dataRow['assigned'];
+            $this->assigned2 = $dataRow['assigned2'];
+            $this->firstname = $dataRow['firstname'];
+            $this->lastname = $dataRow['lastname'];
+            $this->hiring_date = $dataRow['hiring_date'];
+            $this->total_days = $dataRow['total_days'];
+            $this->job_title_description = $dataRow['job_title_description'];
+            $this->job_title_id = $dataRow['job_title_id'];
+            $this->shift_location = $dataRow['shift_location'];
+            $this->shift_location_id = $dataRow['shift_location_id'];
 			$this->available = $dataRow['available'];
-			$this->user_name = $dataRow['user_name'];
-			$this->role = $dataRow['role'];
-			$this->profile_pic = $dataRow['profile_pic'];
-			$this->firstname = $dataRow['firstname'];
-			$this->lastname = $dataRow['lastname'];
-			$this->pin = $dataRow['pin'];
-			$this->pin_flag = $dataRow['pin_flag'];
-			$this->is_cust_dash = $dataRow['is_cust_dash'];
-			$this->line_cust_dash = $dataRow['line_cust_dash'];
-			$this->u_status = $dataRow['u_status'];
-			$this->email = $dataRow['email'];
+            $this->available_time = $dataRow['available_time'];
+            $this->pin = $dataRow['pin'];
+            $this->pin_flag = $dataRow['pin_flag'];
+            $this->training = $dataRow['training'];
+            $this->training_station = $dataRow['training_station'];
+            $this->training_position = $dataRow['training_position'];
+            $this->is_cust_dash = $dataRow['is_cust_dash'];
+            $this->line_cust_dash = $dataRow['line_cust_dash'];
+            $this->u_status = $dataRow['u_status'];
 			return $this;
 		}
 	}
