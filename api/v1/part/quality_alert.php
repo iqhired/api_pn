@@ -32,9 +32,10 @@ if ($jwt) {
 
         $item->qa = $_POST['qa'];
         $item->part_number = $_POST["part_number"];
+        $item->station = $_POST["station"];
+        $item->part_family = $_POST["part_family"];
         $item->prod_area = $_POST["prod_area"];
         $item->internal = $_POST["internal"];
-        $item->part_name = $_POST["part_name"];
         $item->customer = $_POST["customer"];
         $item->external = $_POST["external"];
         $item->dependent_ans = $_POST['dependent_ans'];

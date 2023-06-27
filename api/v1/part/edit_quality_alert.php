@@ -13,7 +13,7 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once '../../../classes/v1/Part_Produced.php';
+include_once '../../../classes/v1/Quality_Alert.php';
 
 $jwt = $_SERVER['HTTP_ACCESS_TOKEN'];
 if ($jwt) {
@@ -30,19 +30,9 @@ if ($jwt) {
 
         $data = json_decode(file_get_contents("php://input"));
 
-        $item->qa = $_POST['qa'];
         $item->part_number = $_POST["part_number"];
-        $item->prod_area = $_POST["prod_area"];
-        $item->internal = $_POST["internal"];
-        $item->part_name = $_POST["part_name"];
-        $item->customer = $_POST["customer"];
-        $item->external = $_POST["external"];
-        $item->user = $_POST["user"];
-        $item->part_number = $_POST['part_number'];
-        $item->dependant_ans = $_POST['dependant_ans'];
-        $item->created_at = $_POST['created_at'];
+        $item->dependent_ans = $_POST['dependent_ans'];
         $item->updated_at = $_POST['updated_at'];
-        $item->closed_date = $_POST['closed_date'];
 
         $sgPart = $item->getEditQualityAlert();
 
