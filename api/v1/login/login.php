@@ -30,8 +30,14 @@ if($jwt){
 
 		$item->user_name = $_POST['user'];
 		$item->password = $_POST['password'];
-
-		$sgUser = $item->getUserByUNameandPassword();
+		$sgUser = null;
+		if(isset($_POST['password'])){
+			$sgUser = $item->getUserByUNameandPassword();
+		}else{
+			$item->password_pin = $_POST['password_pin'];
+			$sgUser = $item->getUserByUNameandPin();
+		}
+		
 		if($sgUser != null){
 			http_response_code(200);
 			echo json_encode(array("STATUS" => "Success" , "user" => $sgUser));
