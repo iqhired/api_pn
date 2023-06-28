@@ -41,11 +41,11 @@ if($jwt){
 		
 		if($sgUser != null){
 			http_response_code(200);
-			echo json_encode(array("STATUS" => "Success" , "user" => $sgUser));
+			echo json_encode(array("status" => "Success" , "user" => $sgUser));
 		} else{
 
 			http_response_code(401);
-			echo json_encode(array("message" => "Login failed. Check User Name and Password"));
+			echo json_encode(array("status" => "Error" , "errormessage" => "Login failed. Check User Name and Password"));
 		}
 
 	}catch (Exception $e){
