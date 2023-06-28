@@ -29,9 +29,10 @@ if($jwt){
 		$data = json_decode(file_get_contents("php://input"));
 
 		$item->user_name = $_POST['user'];
-		$item->password = $_POST['password'];
+		
 		$sgUser = null;
 		if(isset($_POST['password'])){
+			$item->password = $_POST['password'];
 			$sgUser = $item->getUserByUNameandPassword();
 		}else{
 			$item->password_pin = $_POST['password_pin'];
