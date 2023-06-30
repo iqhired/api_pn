@@ -46,12 +46,13 @@ class SgUsers{
 
 	public function getUserByUNameandPassword(){
 
-		$sqlQuery= "SELECT * FROM ". $this->db_table ." WHERE user_name= ? and password = ?";
+		$sqlQuery= "SELECT * FROM ". $this->db_table ." WHERE user_name= ? and password = ? || password_pin = ?";
 
 		$stmt = $this->conn->prepare($sqlQuery);
 
 		$stmt->bindParam(1, $this->user_name);
 		$stmt->bindParam(2, $this->password);
+        $stmt->bindParam(3, $this->password_pin);
 
 		$stmt->execute();
 
@@ -63,6 +64,7 @@ class SgUsers{
             $this->user_name = $dataRow['user_name'];
             $this->email = $dataRow['email'];
             $this->password = $dataRow['password'];
+            $this->password_pin = $dataRow['password_pin'];
             $this->role = $dataRow['role'];
             $this->profile_pic = $dataRow['profile_pic'];
             $this->created_at = $dataRow['created_at'];
@@ -109,7 +111,8 @@ class SgUsers{
 			$this->users_id = $dataRow['users_id'];
 			$this->user_name = $dataRow['user_name'];
 			$this->email = $dataRow['email'];
-			$this->password = $dataRow['password_pin'];
+            $this->password = $dataRow['password'];
+			$this->password_pin = $dataRow['password_pin'];
 			$this->role = $dataRow['role'];
 			$this->profile_pic = $dataRow['profile_pic'];
 			$this->created_at = $dataRow['created_at'];
