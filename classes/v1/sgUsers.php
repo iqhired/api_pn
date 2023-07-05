@@ -46,13 +46,12 @@ class SgUsers{
 
 	public function getUserByUNameandPassword(){
 
-		$sqlQuery= "SELECT * FROM ". $this->db_table ." WHERE user_name= ? and password = ? || password_pin = ?";
+		$sqlQuery= "SELECT * FROM ". $this->db_table ." WHERE user_name= ? and password = ?";
 
 		$stmt = $this->conn->prepare($sqlQuery);
 
 		$stmt->bindParam(1, $this->user_name);
 		$stmt->bindParam(2, $this->password);
-        $stmt->bindParam(3, $this->password_pin);
 
 		$stmt->execute();
 
