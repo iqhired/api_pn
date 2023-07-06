@@ -29,16 +29,24 @@ if($jwt){
 		$data = json_decode(file_get_contents("php://input"));
 
 		$item->user_name = $_POST['user'];
-		$item->password = $_POST['password'];
-
-		$sgUser = $item->getUserByUNameandPassword();
+        $item->password = $_POST['password'];
+        $item->password_pin = $_POST['password_pin'];
+        $sgUser = null;
+		$sgUser = null;
+		if(isset($_POST['password'])){
+			$item->password = $_POST['password'];
+			$sgUser = $item->getUserByUNameandPassword();
+		}else{
+			$item->password_pin = $_POST['password_pin'];
+			$sgUser = $item->getUserByUNameandPin();
+		}
 		if($sgUser != null){
 			http_response_code(200);
-			echo json_encode(array("STATUS" => "Success" , "user" => $sgUser));
+			echo json_encode(array("status" => "Success" , "user" => $sgUser));
 		} else{
 
 			http_response_code(401);
-			echo json_encode(array("message" => "Login failed. Check User Name and Password"));
+			echo json_encode(array("status" => "Error" , "errormessage" => "Login failed. Check User Name and Password"));
 		}
 
 	}catch (Exception $e){
