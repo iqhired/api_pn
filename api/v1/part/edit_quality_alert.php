@@ -30,9 +30,22 @@ if ($jwt) {
 
         $data = json_decode(file_get_contents("php://input"));
 
+        $item->qa = $_POST['qa'];
         $item->part_number = $_POST["part_number"];
+        $item->station = $_POST["station"];
+        $item->part_family = $_POST["part_family"];
+        $item->prod_area = $_POST["prod_area"];
+        $item->internal = $_POST["internal"];
+        $item->customer = $_POST["customer"];
+        $item->external = $_POST["external"];
         $item->dependent_ans = $_POST['dependent_ans'];
+        $item->user = $_POST["user"];
+        $item->closed_by = $_POST["closed_by"];
+        $item->created_at = $_POST['created_at'];
         $item->updated_at = $_POST['updated_at'];
+        $item->closed_date = $_POST['closed_date'];
+        $item->ok_image = $_POST['ok_image'];
+        $item->nok_image = $_POST['nok_image'];
 
         $sgPart = $item->getEditQualityAlert();
 
