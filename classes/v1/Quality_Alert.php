@@ -46,11 +46,12 @@ class Quality_Alert
         if ($dataRow == null || empty($dataRow)) {
             return null;
         } else {
-            $this->id = $dataRow['id'];
+
             $this->qa = $dataRow['qa'];
             $this->part_number = $dataRow['part_number'];
             $this->station = $dataRow['station'];
             $this->part_family = $dataRow['part_family'];
+            $this->prod_area = $dataRow["prod_area"];
             $this->internal = $dataRow['internal'];
             $this->customer = $dataRow['customer'];
             $this->external = $dataRow['external'];
@@ -70,10 +71,10 @@ class Quality_Alert
     public function getEditQualityAlert()
     {
 
-        $sqlQuery = "update " . $this->db_table . " SET dependent_ans = ? ,updated_at = ? where part_number = '$this->part_number'";
+        $sqlQuery = "update " . $this->db_table . " SET qa = ?, part_number = ? , station = ? , part_family = ? ,prod_area = ? , internal = ? , customer = ? , external = ? , dependent_ans = ? ,user = ? , closed_by = ? , updated_at = ? ,closed_date = ? , ok_image = ? , nok_image = ? where part_number = '$this->part_number'";
 
         $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute([$this->dependent_ans, $this->updated_at]);
+        $stmt->execute([$this->qa,$this->part_number,$this->station , $this->part_family , $this->prod_area , $this->internal, $this->customer , $this->external ,  $this->dependent_ans, $this->user ,$this->closed_by, $this->updated_at,$this->closed_date,$this->ok_image,$this->nok_image]);
 
         $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".id DESC LIMIT 0,1";
         $stmt = $this->conn->prepare($sqlQuery1);
