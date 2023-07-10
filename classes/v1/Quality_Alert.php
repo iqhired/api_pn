@@ -71,7 +71,7 @@ class Quality_Alert
     public function getEditQualityAlert()
     {
 
-         if (empty($this->ok_image && $this->nok_image)){
+         if (empty($this->ok_image) && empty($this->nok_image)){
              $sqlQuery = "update " . $this->db_table . " SET qa = ?, part_number = ? , station = ? , part_family = ? ,prod_area = ? , internal = ? , customer = ? , external = ? , dependent_ans = ? ,user = ? , closed_by = ? , updated_at = ? ,closed_date = ?   where part_number = '$this->part_number'";
 
              $stmt = $this->conn->prepare($sqlQuery);
