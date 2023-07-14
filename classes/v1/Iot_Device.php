@@ -78,8 +78,8 @@ class Iot_Device
     }
     public function getdeleteIotDevice()
     {
-
-        $sqlQuery = "delete from " . $this->db_table . " where device_id = ?";
+        $sqlQuery = "update " . $this->db_table . " SET is_deleted = 1  where device_id = ?";
+       // $sqlQuery = "delete from " . $this->db_table . " where device_id = ?";
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->delete_check]);
