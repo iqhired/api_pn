@@ -98,6 +98,26 @@ class Iot_Device
         }
 
     }
+    public function getdelIotDevice()
+    {
+        $sqlQuery = "update " . $this->db_table . " SET is_deleted = 1  where device_id = ?";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute([$this->device_id]);
+
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $stmt = $this->conn->prepare($sqlQuery1);
+        $stmt->execute();
+        $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($dataRow == null || empty($dataRow)) {
+            return null;
+        } else {
+            $this->id = $dataRow['id'];
+            $this->device_id = $dataRow['device_id'];
+            return $this;
+        }
+
+    }
 
 }
 
