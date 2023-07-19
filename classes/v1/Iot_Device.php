@@ -26,10 +26,10 @@ class Iot_Device
     public function getIotDevice()
     {
 
-        $sqlQuery = "insert into " . $this->db_table . "(c_id,device_id,device_name,device_description,device_location,created_by,created_on) values ( ?,?,?,?,?,?,?)";
+        $sqlQuery = "insert into " . $this->db_table . "(c_id,device_id,device_name,device_description,device_location,is_active,created_by,created_on) values ( ?,?,?,?,?,?,?,?)";
 
         $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute([$this->c_id, $this->device_id, $this->device_name, $this->device_description, $this->device_location, $this->created_by, $this->created_on]);
+        $stmt->execute([$this->c_id, $this->device_id, $this->device_name, $this->device_description, $this->device_location,$this->is_active,$this->created_by, $this->created_on]);
 
         $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
         $stmt = $this->conn->prepare($sqlQuery1);
@@ -44,6 +44,7 @@ class Iot_Device
             $this->device_name = $dataRow['device_name'];
             $this->device_description = $dataRow['device_description'];
             $this->device_location = $dataRow['device_location'];
+            $this->is_active = $dataRow['is_active'];
             $this->created_by = $dataRow['created_by'];
             $this->created_on = $dataRow['created_on'];
             $this->delete_check = $dataRow['delete_check'];
