@@ -26,10 +26,10 @@ class Iot_Device
     public function getIotDevice()
     {
 
-        $sqlQuery = "insert into " . $this->db_table . "(c_id,device_id,device_name,device_description,device_location,is_active,created_by,created_on) values ( ?,?,?,?,?,?,?,?)";
+        $sqlQuery = "insert into " . $this->db_table . "(c_id,device_id,device_name,device_description,device_location,is_active,created_by,created_on) values (?,?,?,?,?,?,?,?)";
 
         $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute([$this->c_id, $this->device_id, $this->device_name, $this->device_description, $this->device_location,$this->is_active,$this->created_by, $this->created_on]);
+        $stmt->execute([$this->c_id, $this->device_id, $this->device_name, $this->device_description, $this->device_location, $this->is_active, $this->created_by, $this->created_on]);
 
         $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
         $stmt = $this->conn->prepare($sqlQuery1);

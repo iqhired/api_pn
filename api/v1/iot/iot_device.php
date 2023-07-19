@@ -33,7 +33,7 @@ if($jwt){
         $item->device_name = $_POST['device_name'];
         $item->device_description = $_POST['device_description'];
         $item->device_location = $_POST['device_location'];
-            $item->is_active = $_POST['is_active'];
+        $item->is_active = $_POST['is_active'];
         $item->created_by = $_POST['created_by'];
         $item->created_on = $_POST['created_on'];
 
