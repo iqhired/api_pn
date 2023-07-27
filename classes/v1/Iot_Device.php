@@ -31,7 +31,7 @@ class Iot_Device
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->c_id, $this->device_id, $this->device_name, $this->device_description, $this->device_location, $this->is_active, $this->created_by, $this->created_on]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".device_id desc limit 0,1";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -47,7 +47,6 @@ class Iot_Device
             $this->is_active = $dataRow['is_active'];
             $this->created_by = $dataRow['created_by'];
             $this->created_on = $dataRow['created_on'];
-            $this->delete_check = $dataRow['delete_check'];
             return $this;
         }
 
@@ -60,7 +59,7 @@ class Iot_Device
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->device_description, $this->device_location, $this->modified_by, $this->modified_on]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".device_id desc limit 0,1";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -85,7 +84,7 @@ class Iot_Device
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->delete_check]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".device_id desc limit 0,1";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -105,7 +104,7 @@ class Iot_Device
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->device_id]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".device_id desc limit 0,1";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
