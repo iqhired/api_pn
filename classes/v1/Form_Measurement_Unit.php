@@ -18,7 +18,6 @@ class Form_Measurement_Unit
 
     public function getFormMeasurementUnit()
     {
-
         $sqlQuery = "insert into " . $this->db_table . "(name,description,unit_of_measurement,created_at) values (?,?,?,?)";
 
         $stmt = $this->conn->prepare($sqlQuery);
