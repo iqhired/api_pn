@@ -33,7 +33,7 @@ if($jwt){
         $item->password_pin = $_POST['password_pin'];
         $sgUser = null;
 		$sgUser = null;
-		if(isset($_POST['password'])){
+		if(!empty($_POST['password'])){
 			$item->password = $_POST['password'];
 			$sgUser = $item->getUserByUNameandPassword();
 		}else{

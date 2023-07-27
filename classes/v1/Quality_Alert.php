@@ -34,37 +34,10 @@ class Quality_Alert
     {
 
         $sqlQuery = "insert into " . $this->db_table . "(qa,part_number,station,part_family,prod_area,internal,customer,external,dependent_ans,user,ok_image,nok_image,closed_by,created_at,updated_at,closed_date) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->qa,$this->part_number,$this->station,$this->part_family,$this->prod_area,$this->internal,$this->customer,$this->external,$this->dependent_ans,$this->user,$this->ok_image,$this->nok_image,$this->closed_by,$this->created_at,$this->updated_at,$this->closed_date]);
-
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table;
-        $stmt = $this->conn->prepare($sqlQuery1);
-        $stmt->execute();
-        $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($dataRow == null || empty($dataRow)) {
-            return null;
-        } else {
-
-            $this->qa = $dataRow['qa'];
-            $this->part_number = $dataRow['part_number'];
-            $this->station = $dataRow['station'];
-            $this->part_family = $dataRow['part_family'];
-            $this->prod_area = $dataRow["prod_area"];
-            $this->internal = $dataRow['internal'];
-            $this->customer = $dataRow['customer'];
-            $this->external = $dataRow['external'];
-            $this->dependent_ans = $dataRow['dependent_ans'];
-            $this->user = $dataRow['user'];
-            $this->closed_by = $dataRow['closed_by'];
-            $this->created_at = $dataRow['created_at'];
-            $this->updated_at = $dataRow['updated_at'];
-            $this->closed_date = $dataRow['closed_date'];
-            $this->ok_image = $dataRow['ok_image'];
-            $this->nok_image = $dataRow['nok_image'];
-            return $this;
-        }
+		$qa_id = $this->conn->lastInsertId();
+        return $qa_id;
 
     }
 

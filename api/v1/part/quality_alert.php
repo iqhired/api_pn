@@ -51,10 +51,10 @@ if ($jwt) {
 
         if ($sgPartp != null) {
             http_response_code(200);
-            echo json_encode(array("STATUS" => "Success", "part_number" => $sgPartp));
+            echo json_encode(array("STATUS" => "Success", "qaID" => $sgPartp));
         } else {
             http_response_code(401);
-            echo json_encode(array("message" => "Part number failed"));
+            echo json_encode(array("message" => "Quality Alert create Failed. Please retry."));
         }
 
     } catch (Exception $e) {
