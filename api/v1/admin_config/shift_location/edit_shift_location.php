@@ -42,6 +42,7 @@ if($jwt){
             echo json_encode(array("message" => "Shift Location Updated failed"));
         }
 
+
     }catch (Exception $e){
 
         http_response_code(401);
