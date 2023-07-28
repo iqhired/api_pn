@@ -15,6 +15,7 @@ include_once '../../../../classes/v1/Shift_Location.php';
 
 
 $jwt = $_SERVER['HTTP_ACCESS_TOKEN'];
+
 if($jwt){
     try {
 
