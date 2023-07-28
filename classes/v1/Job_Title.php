@@ -1,5 +1,5 @@
 <?php
-class Cam_Job_Title
+class Job_Title
 {
     private $conn;
     private $db_table = "Cam_Job_Title";
@@ -23,7 +23,7 @@ class Cam_Job_Title
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->job_name,$this->created_at , $this->updated_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".job_title_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -47,7 +47,7 @@ class Cam_Job_Title
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->job_name, $this->updated_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".job_title_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
