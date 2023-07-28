@@ -11,7 +11,7 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once '../../../../classes/v1/Shift_Location.php';
+include_once '../../../../classes/v1/Tm_Description.php';
 
 $jwt = $_SERVER['HTTP_ACCESS_TOKEN'];
 if($jwt){
@@ -24,24 +24,22 @@ if($jwt){
         $database = new Database();
         $db = $database->getConnection();
 
-        $item = new Shift_Location($db);
+        $item = new Tm_Description($db);
 
         $data = json_decode(file_get_contents("php://input"));
 
-        $item->shift_id = $_POST['shift_id'];
-        $item->shift_name = $_POST['shift_name'];
-        $item->updated_at = $_POST['updated_at'];
+       // $item->delete_check = $_POST['delete_check'];
+        $item->tm_description_id = $_POST['tm_description_id'];
 
-        $sgShift = $item->getEditShiftLocation();
+        $sgDescription = $item->getdeleteTmDescription();
 
-        if($sgShift != null){
+        if($sgDescription != null){
             http_response_code(200);
-            echo json_encode(array("STATUS" => "Success" , "shift_id" => $sgShift));
+            echo json_encode(array("STATUS" => "Success" , "tm_description_id" => $sgDescription));
         } else{
             http_response_code(401);
-            echo json_encode(array("message" => "Shift Location Updated failed"));
+            echo json_encode(array("message" => "Description failed"));
         }
-
     }catch (Exception $e){
 
         http_response_code(401);

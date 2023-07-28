@@ -1,5 +1,5 @@
 <?php
-class Cam_shift
+class Shift_Location
 {
     private $conn;
     private $db_table = "Cam_Shift";
@@ -23,7 +23,7 @@ class Cam_shift
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->shift_name,$this->created_at , $this->updated_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".shift_id DESC limit 0,1";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -47,7 +47,7 @@ class Cam_shift
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->shift_name, $this->updated_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".shift_id DESC limit 0,1";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -22,7 +22,7 @@ class Tm_Property
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->tm_property_name, $this->created_by]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".tm_property_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -44,7 +44,7 @@ class Tm_Property
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->tm_property_name]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".tm_property_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -67,7 +67,7 @@ class Tm_Property
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->tm_property_id]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".tm_property_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
