@@ -2,7 +2,7 @@
 class Material_Config
 {
     private $conn;
-    private $db_table = "Material_Config";
+    private $db_table = "material_config";
     public $material_id;
     public $teams;
     public $users;
@@ -26,7 +26,7 @@ class Material_Config
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->teams,$this->users,$this->material_type,$this->serial_num_required,$this->created_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".material_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ class Material_Config
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->teams, $this->users, $this->material_type, $this->serial_num_required, $this->created_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".material_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
