@@ -11,7 +11,7 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once '../../../../classes/v1/Position.php';
+include_once '../../../../classes/v1/Form_Type.php';
 
 $jwt = $_SERVER['HTTP_ACCESS_TOKEN'];
 if($jwt){
@@ -24,24 +24,23 @@ if($jwt){
         $database = new Database();
         $db = $database->getConnection();
 
-        $item = new Position($db);
+        $item = new Form_Type($db);
 
         $data = json_decode(file_get_contents("php://input"));
 
-        $item->position_id = $_POST['position_id'];
-        $item->position_name = $_POST['position_name'];
+        $item->form_type_name = $_POST['form_type_name'];
+        $item->wol = $_POST['wol'];
+        $item->created_at = $_POST['created_at'];
         $item->updated_at = $_POST['updated_at'];
 
+        $sgForm = $item->getFormType();
 
-
-        $sgPos = $item->getEditPosition();
-
-        if($sgPos != null){
+        if($sgForm != null){
             http_response_code(200);
-            echo json_encode(array("STATUS" => "Success" , "position_id" => $sgPos));
+            echo json_encode(array("STATUS" => "Success" , "form_type_name" => $sgForm));
         } else{
             http_response_code(401);
-            echo json_encode(array("message" => "Position Updated failed"));
+            echo json_encode(array("message" => "Form Type failed"));
         }
 
     }catch (Exception $e){

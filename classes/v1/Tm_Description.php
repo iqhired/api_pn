@@ -2,7 +2,7 @@
 class Tm_Description
 {
     private $conn;
-    private $db_table = "Tm_Description";
+    private $db_table = "tm_description";
     public $tm_description_id;
     public $tm_description_name;
     public $created_by;

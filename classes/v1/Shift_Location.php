@@ -2,7 +2,7 @@
 class Shift_Location
 {
     private $conn;
-    private $db_table = "Cam_Shift";
+    private $db_table = "cam_shift";
     public $shift_id;
     public $shift_name;
     public $created_at;

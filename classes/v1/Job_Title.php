@@ -7,8 +7,6 @@ class Job_Title
     public $job_name;
     public $created_at;
     public $updated_at;
-
-
     public function __construct($db)
     {
 

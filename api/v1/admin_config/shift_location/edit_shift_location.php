@@ -32,6 +32,7 @@ if($jwt){
         $item->shift_name = $_POST['shift_name'];
         $item->updated_at = $_POST['updated_at'];
 
+
         $sgShift = $item->getEditShiftLocation();
 
         if($sgShift != null){

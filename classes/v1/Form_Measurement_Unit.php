@@ -2,7 +2,7 @@
 class Form_Measurement_Unit
 {
     private $conn;
-    private $db_table = "Form_Measurement_Unit";
+    private $db_table = "form_measurement_unit";
     public $form_measurement_unit_id;
     public $name;
     public $description;
@@ -12,7 +12,6 @@ class Form_Measurement_Unit
 
     public function __construct($db)
     {
-
         $this->conn = $db;
     }
 
@@ -23,11 +22,10 @@ class Form_Measurement_Unit
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->name, $this->description,$this->unit_of_measurement,$this->created_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".form_measurement_unit_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
-
         if ($dataRow == null || empty($dataRow)) {
             return null;
         } else {
@@ -46,7 +44,7 @@ class Form_Measurement_Unit
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->name,$this->description,$this->unit_of_measurement]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".form_measurement_unit_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);

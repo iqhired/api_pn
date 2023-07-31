@@ -2,11 +2,10 @@
 class Tm_Equipment
 {
     private $conn;
-    private $db_table = "Tm_Equipment";
+    private $db_table = "tm_equipment";
     public $tm_equipment_id;
     public $tm_equipment_name;
     public $created_by;
-    public $delete_check;
 
 
     public function __construct($db)
@@ -60,26 +59,5 @@ class Tm_Equipment
         }
 
     }
-    public function getdeleteTmEquipment()
-    {
 
-        $sqlQuery = "delete from " . $this->db_table . " where tm_equipment_id = ?";
-
-        $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute([$this->tm_equipment_id]);
-
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".tm_equipment_id";
-        $stmt = $this->conn->prepare($sqlQuery1);
-        $stmt->execute();
-        $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($dataRow == null || empty($dataRow)) {
-            return null;
-        } else {
-            $this->tm_equipment_id = $dataRow['tm_equipment_id'];
-            $this->tm_equipment_name = $dataRow['tm_equipment_name'];
-            return $this;
-        }
-
-    }
 }

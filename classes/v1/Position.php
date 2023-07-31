@@ -2,7 +2,7 @@
 class Position
 {
     private $conn;
-    private $db_table = "Cam_Position";
+    private $db_table = "cam_position";
     public $position_id;
     public $position_name;
     public $created_at;

@@ -2,7 +2,7 @@
 class Form_Type
 {
     private $conn;
-    private $db_table = "Form_Type";
+    private $db_table = "form_type";
     public $form_type_id;
     public $form_type_name;
     public $wol;
@@ -24,7 +24,7 @@ class Form_Type
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->form_type_name,$this->wol,$this->created_at , $this->updated_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".form_type_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -49,7 +49,7 @@ class Form_Type
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute([$this->form_type_name,$this->wol, $this->updated_at]);
 
-        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".";
+        $sqlQuery1 = "SELECT * FROM " . $this->db_table . " ORDER BY " . $this->db_table. ".form_type_id";
         $stmt = $this->conn->prepare($sqlQuery1);
         $stmt->execute();
         $dataRow = $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);

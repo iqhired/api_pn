@@ -2,7 +2,7 @@
 class Tm_Building
 {
     private $conn;
-    private $db_table = "Tm_Building";
+    private $db_table = "tm_equipment";
     public $tm_building_id;
     public $tm_building_name;
     public $created_by;

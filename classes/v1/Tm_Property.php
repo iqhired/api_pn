@@ -2,7 +2,7 @@
 class Tm_Property
 {
     private $conn;
-    private $db_table = "Tm_Property";
+    private $db_table = "tm_property";
     public $tm_property_id;
     public $tm_property_name;
     public $created_by;
