@@ -2,7 +2,7 @@
 class Job_Title
 {
     private $conn;
-    private $db_table = "Cam_Job_Title";
+    private $db_table = "cam_job_title";
     public $job_title_id;
     public $job_name;
     public $created_at;
