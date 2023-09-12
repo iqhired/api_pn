@@ -143,7 +143,7 @@ class SgUsers{
 	
 	public function getUserByUNameandQRPassword(){
 		
-		$sqlQuery= "SELECT * FROM ". $this->db_table ." WHERE user_name= ? and qr_password = ? and is_deleted = 0";
+		$sqlQuery= "SELECT * FROM ". $this->db_table ." WHERE user_name= ? and qr_password = ?";
 		
 		$stmt = $this->conn->prepare($sqlQuery);
 		
@@ -161,6 +161,7 @@ class SgUsers{
 			$this->email = $dataRow['email'];
 			$this->password = $dataRow['password'];
 			$this->password_pin = $dataRow['password_pin'];
+            $this->qr_password = $dataRow['qr_password'];
 			$this->role = $dataRow['role'];
 			$this->profile_pic = $dataRow['profile_pic'];
 			$this->created_at = $dataRow['created_at'];
