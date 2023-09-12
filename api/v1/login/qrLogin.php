@@ -29,9 +29,9 @@
 			$data = json_decode(file_get_contents("php://input"));
 			
 			$item->user_name = $_POST['user'];
-			$item->qr_password = $_POST['qrpassword'];
+			$item->qr_password = $_POST['qr_password'];
 			$sgUser = null;
-			if(!empty($_POST['qrpassword'])){
+			if(!empty($_POST['qr_password'])){
 				$sgUser = $item->getUserByUNameandQRPassword();
 			}
 			if($sgUser != null){
