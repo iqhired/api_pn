@@ -28,16 +28,16 @@ if($jwt){
 
 		$data = json_decode(file_get_contents("php://input"));
 
-		$item->user_name = $_POST['user'];
+		$item->user_name = base64_decode($_POST['user']);
         $item->password = $_POST['password'];
-        $item->password_pin = $_POST['password_pin'];
+        $item->password_pin = base64_decode($_POST['password_pin']);
         $sgUser = null;
 		$sgUser = null;
 		if(!empty($_POST['password'])){
 			$item->password = $_POST['password'];
 			$sgUser = $item->getUserByUNameandPassword();
 		}else{
-			$item->password_pin = $_POST['password_pin'];
+            $item->password_pin = base64_decode($_POST['password_pin']);
 			$sgUser = $item->getUserByUNameandPin();
 		}
 		if($sgUser != null){
