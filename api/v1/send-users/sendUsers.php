@@ -26,19 +26,21 @@ if ($result->num_rows > 0) {
     $mysqli->close();
 
     $json_data = json_encode($users);
-
-    $post_url = 'http://127.0.0.1:8000/store-external-users';
+    $curl_post_data = array(
+        'data' => $json_data
+    );
+    $post_url = 'http://av:8888/store-external-users';
 
     $curl = curl_init($post_url);
 
     $headers = array(
-        "Accept: application/json"
+        "Accept: application/x-www-form-urlencoded"
     );
     
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $json_data);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
 
     $response = curl_exec($curl);
 
