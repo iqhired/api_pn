@@ -1,6 +1,7 @@
 <?php
 	require "../../../vendor/autoload.php";
-	
+	require "../../../config/config.php";
+
 	use Firebase\JWT\JWT;
 	use Firebase\JWT\Key;
 	
@@ -8,20 +9,11 @@
 	if ($jwt) {
 		try {
             
-			
-            $key = "aseqw5844q734aqqweFADFd54GE456A";
 			$decoded = JWT::decode($jwt, new Key($secretkey, 'HS256'));
 
-            // Payload data
-            $payload = array(
-                "credentials" => $decoded->credentials,
-                "exp" => time()+100
-            );
+            $url = $iotBaseUrl . "external-auth";
+            $redirectUrl = $url . "?token=" . $jwt;
 
-
-            $jwt = JWT::encode($payload, $key, 'HS256');
-            $externalDomain = "http://av:8888/external-auth";
-            $redirectUrl = $externalDomain . "?token=" . $jwt;
             header("Location: $redirectUrl");
 
 		} catch (Exception $e) {
