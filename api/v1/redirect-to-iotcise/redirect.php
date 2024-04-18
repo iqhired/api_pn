@@ -9,7 +9,7 @@ $key = "aseqw5844q734aqqweFADFd54GE456A";
 
 // Payload data
 $payload = array(
-    "credentials" => 'test.admin',
+    "credentials" => $_GET['credential'],
     "username" => "example_user",
     "exp" => time()+1000
 );
