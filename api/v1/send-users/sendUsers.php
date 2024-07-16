@@ -3,7 +3,7 @@
 $host = 'localhost';
 $username = 'root';
 $password = '1221';
-$database = 'industry5';
+$database = 'saargummi';
 
 $mysqli = new mysqli($host, $username, $password, $database);
 
@@ -12,14 +12,18 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-$query = "SELECT DISTINCT email, username FROM (SELECT firstname AS name, user_name AS username, email FROM cam_users) AS unique_users";
+$query = "SELECT cu.users_id AS user_id, cu.firstname AS name, cu.user_name AS username, cu.email
+          FROM cam_users cu
+          LEFT JOIN synced_users su ON cu.users_id = su.user_id
+          WHERE su.user_id IS NULL";
+
 $result = $mysqli->query($query);
 
 if ($result->num_rows > 0) {
     $users = array();
 
     while ($row = $result->fetch_assoc()) {
-        $row['password'] = '$2y$12$YfnWJERpwDktxaNMt7u/eeDpTqj5aAEQi2NDw.1.H7/vMVzdaNgwy';
+        $row['password'] = '$2y$10$DrEGnsZHc4CwseHVxRqCw.CP9K3JbeQufsEqS2ALNbD.IrM81lRA2';
         $users[] = $row;
     }
 
@@ -51,7 +55,36 @@ if ($result->num_rows > 0) {
     if (curl_errno($curl)) {
         echo 'Error: ' . curl_error($curl);
     } else {
-        echo 'Response from server: ' . $response;
+         
+        $values = json_decode($response);
+
+        $mysqli = new mysqli($host, $username, $password, $database);
+
+        if ($mysqli->connect_errno) {
+            echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+            exit();
+        }
+        // Prepare the SQL statement
+        $sql = "INSERT INTO synced_users (user_id) VALUES (?)";
+        $stmt = $mysqli->prepare($sql);
+
+        // Check if the statement was prepared successfully
+        if ($stmt === false) {
+            die("Prepare failed: " . $mysqli->error);
+        }
+
+        // Insert each value into the table
+        foreach ($values as $value) {
+            // Bind the value and execute the statement
+            $stmt->bind_param("i", $value);
+            $stmt->execute();
+        }
+
+        // Close the statement and connection
+        $stmt->close();
+        $mysqli->close();
+
+        echo "Users Synced Successfully";
     }
 
     curl_close($curl);
