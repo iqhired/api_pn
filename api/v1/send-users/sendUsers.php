@@ -1,11 +1,10 @@
 <?php
     // Database connection parameters
-//    $host = 'localhost';
-//    $username = 'root';
-//    $password = '1221';
-//    $database = 'saargummi';
-//
-    include "database_config.php";
+    $host = "localhost";
+    $username = "ashams001";
+    $password = "iqHired@123";
+    $database = "pn";
+
     $mysqli = new mysqli($host, $username, $password, $database);
     
     if ($mysqli->connect_errno) {
@@ -38,7 +37,9 @@
             'data' => $json_data
         );
         
-//        $post_url = 'http://127.0.0.1:8000/store-external-users';
+//        $post_url = 'http://av:8888/store-external-users';
+//        $urls =  array("http://av:8888/store-external-users");
+        
         $urls =  array("https://avinya.iotcise.com/store-external-users", "https://saargummi.iotcise.com/store-external-users", "https://sense.plantnavigator.com/store-external-users", "https://supplier.plantnavigator.com/store-external-users");
         foreach ($urls as $url) {
             $curl = curl_init($url);
